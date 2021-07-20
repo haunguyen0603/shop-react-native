@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 function HomeScreen() {
     return (
       <View style={{ flex: 1}}>
-        <ProductList></ProductList>
+        <ProductList />
       </View>
     );
 }
@@ -40,7 +40,7 @@ export default class TabBar extends Component {
                         name="Home" 
                         component={HomeScreen} 
                         options={{
-                            tabBarLabel: 'Home',
+                            tabBarLabel: 'Trang chủ',
                             tabBarIcon: ({ color, size }) => (
                               <MaterialCommunityIcons name="home" color={color} size={size} />
                             ),
@@ -50,7 +50,7 @@ export default class TabBar extends Component {
                         name="Categories" 
                         component={Categories} 
                         options={{
-                            tabBarLabel: 'Categories',
+                            tabBarLabel: 'Danh Mục',
                             tabBarIcon: ({ color, size }) => (
                               <MaterialCommunityIcons name="format-list-bulleted-type" color={color} size={size} />
                             ),
@@ -60,7 +60,7 @@ export default class TabBar extends Component {
                         name="Profile"
                         component={SettingsScreen}
                         options={{
-                            tabBarLabel: 'Profile',
+                            tabBarLabel: 'Tài khoản',
                             tabBarIcon: ({ color, size }) => (
                               <MaterialCommunityIcons name="account" color={color} size={size} />
                             ),

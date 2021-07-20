@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { Image, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Alert } from "react-native";
+import 
+{ 
+  Image, 
+  FlatList, 
+  SafeAreaView, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View, 
+  ActivityIndicator 
+} from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default class ProductList extends Component {
     constructor(props){
@@ -16,7 +27,7 @@ export default class ProductList extends Component {
     };
 
     getData = async () => {
-      fetch('http://192.168.1.3/shop/public/show-product-api?page=' + this.state.page)
+      fetch('http://192.168.43.236/shop/public/show-product-api?page=' + this.state.page)
       .then((response) => response.json())
       .then((json) => 
       {
@@ -57,19 +68,28 @@ export default class ProductList extends Component {
       }, this.getData)
     }
 
+    currencyFormat = (num) => {
+      return 'VND ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+   }
+
     render(){
       return (
         <SafeAreaView style={styles.container}>
+          <Text style={{ fontSize:15, marginHorizontal:8 }}>Tất cả Sản phẩm</Text>
           <FlatList
               numColumns={2}
               data={this.state.dataSource}
               renderItem={({ item })=>(
-              <TouchableOpacity style={styles.item}>
-                <Image source={{uri:'http://192.168.1.3/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
+              <View style={styles.item}>
+                <TouchableOpacity>
+                  <Image source={{uri:'http://192.168.43.236/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
+                </TouchableOpacity> 
                 <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.content}>{item.unit_price}</Text>
+                <TouchableOpacity>
+                  <Text style={styles.content}><MaterialCommunityIcons name="cart-plus" size={24} color="#4d95c6" /> {this.currencyFormat(item.unit_price)}</Text>
+                </TouchableOpacity>
                 {/* <Text style={styles.content}>{item.id}</Text> */}
-              </TouchableOpacity>
+              </View>
               )}
               keyExtractor={(item, index) => index.toString()}
               onEndReached={this.handleLoadMore}
@@ -84,6 +104,7 @@ export default class ProductList extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      backgroundColor: "white",
       // marginTop: StatusBar.currentHeight || 0,
     },
     item: {
