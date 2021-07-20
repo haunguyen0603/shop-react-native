@@ -4,13 +4,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ProductList from './ProductList.js';
+import Home from './Home.js';
 
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
     return (
       <View style={{ flex: 1}}>
-        <ProductList />
+        <Home />
+        {/* <ProductList /> */}
       </View>
     );
 }

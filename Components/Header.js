@@ -6,7 +6,8 @@ import
     TextInput, 
     View,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -29,7 +30,9 @@ export default class Header extends Component {
                     </TouchableOpacity>
                 </View>
                 <TextInput style={styles.headerRow2} placeholder="  Tìm kiếm" />
+                <StatusBar style='auto' />
             </View>
+            
         )
     }
 }

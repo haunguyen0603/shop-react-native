@@ -27,7 +27,7 @@ export default class ProductList extends Component {
     };
 
     getData = async () => {
-      fetch('http://192.168.43.236/shop/public/show-product-api?page=' + this.state.page)
+      fetch('http://192.168.1.3/shop/public/show-product-api?page=' + this.state.page)
       .then((response) => response.json())
       .then((json) => 
       {
@@ -75,14 +75,14 @@ export default class ProductList extends Component {
     render(){
       return (
         <SafeAreaView style={styles.container}>
-          <Text style={{ fontSize:15, marginHorizontal:8 }}>Tất cả Sản phẩm</Text>
+          <Text style={{ fontSize:20, marginHorizontal:8 }}>Tất cả Sản phẩm</Text>
           <FlatList
               numColumns={2}
               data={this.state.dataSource}
               renderItem={({ item })=>(
               <View style={styles.item}>
                 <TouchableOpacity>
-                  <Image source={{uri:'http://192.168.43.236/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
+                  <Image source={{uri:'http://192.168.1.3/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
                 </TouchableOpacity> 
                 <Text style={styles.title}>{item.name}</Text>
                 <TouchableOpacity>
