@@ -11,6 +11,7 @@ import
   ActivityIndicator 
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Header from "./Header";
 
 export default class ProductList extends Component {
     constructor(props){
@@ -75,7 +76,8 @@ export default class ProductList extends Component {
     render(){
       return (
         <SafeAreaView style={styles.container}>
-          <Text style={{ fontSize:20, marginHorizontal:8 }}>Tất cả Sản phẩm</Text>
+          {/* <Text style={{ fontSize:20, marginHorizontal:8 }}>Tất cả Sản phẩm</Text> */}
+          <Header />
           <FlatList
               numColumns={2}
               data={this.state.dataSource}

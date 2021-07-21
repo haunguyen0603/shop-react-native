@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ProductList from './ProductList.js';
 import Home from './Home.js';
+import Profile from './Profile.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,23 +13,22 @@ function HomeScreen() {
     return (
       <View style={{ flex: 1}}>
         <Home />
-        {/* <ProductList /> */}
       </View>
     );
 }
 
 function Categories() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Categories!</Text>
+      <View style={{ flex: 1 }}>
+        <ProductList />
       </View>
     );
 }
   
-function SettingsScreen() {
+function Account() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
+      <View style={{ flex: 1 }}>
+        <Profile />
       </View>
     );
 }
@@ -60,7 +60,7 @@ export default class TabBar extends Component {
                     />
                     <Tab.Screen 
                         name="Profile"
-                        component={SettingsScreen}
+                        component={Account}
                         options={{
                             tabBarLabel: 'Tài khoản',
                             tabBarIcon: ({ color, size }) => (

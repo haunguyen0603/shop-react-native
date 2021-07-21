@@ -29,7 +29,7 @@ export default class Header extends Component {
                         <MaterialCommunityIcons name='cart-outline' size={36} color='white'/>
                     </TouchableOpacity>
                 </View>
-                <TextInput style={styles.headerRow2} placeholder="  Tìm kiếm" />
+                <TextInput style={styles.textInput} placeholder="Tìm kiếm" />
                 <StatusBar style='auto' />
             </View>
             
@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 8
     },
-    headerRow2: {
+    textInput: {
         marginHorizontal: 8,
         height: height / 20,
         backgroundColor: 'white',
         borderRadius: 10,
+        paddingLeft: 10,
     },
     title: {
         fontSize: 20,

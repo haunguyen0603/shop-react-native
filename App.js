@@ -7,7 +7,7 @@ import Header from './Components/Header.js';
 export default function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <TabBar />
       {/* <StatusBar style="auto" /> */}
     </>
