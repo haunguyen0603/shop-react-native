@@ -4,7 +4,6 @@ import
     Text, 
     View,
     StyleSheet,
-    Dimensions,
     Image,
     ScrollView,
     TouchableOpacity,
@@ -13,7 +12,6 @@ import
 import Carousel from 'react-native-snap-carousel';
 import Header from './Header';
 import DiscountProduct from './DiscountProduct.js';
-import ProductList from './ProductList';
 
 export default class Home extends Component {
     constructor(props){

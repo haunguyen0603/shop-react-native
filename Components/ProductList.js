@@ -12,6 +12,7 @@ import
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Header from "./Header";
+import ProductDetail from "./ProductDetail";
 
 export default class ProductList extends Component {
     constructor(props){
@@ -73,17 +74,25 @@ export default class ProductList extends Component {
       return 'VND ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 
+    productDetail () {
+      return (
+        <Stack.Navigator>
+          <Stack.Screen name='ProductDetail' component={ProductDetail} />
+        </Stack.Navigator>
+      )
+    }
+
     render(){
       return (
         <SafeAreaView style={styles.container}>
           {/* <Text style={{ fontSize:20, marginHorizontal:8 }}>Tất cả Sản phẩm</Text> */}
-          <Header />
+          {/* <Header /> */}
           <FlatList
               numColumns={2}
               data={this.state.dataSource}
               renderItem={({ item })=>(
               <View style={styles.item}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('ProductDetail', item)}>
                   <Image source={{uri:'http://192.168.1.7/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
                 </TouchableOpacity> 
                 <Text style={styles.title}>{item.name}</Text>

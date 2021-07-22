@@ -9,34 +9,11 @@ import Profile from './Profile.js';
 import ContactUs from './ContactUs.js';
 import Login from './Login.js';
 import Register from './Register.js';
+import ProductDetail from './ProductDetail.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function HomeScreen() {
-    return (
-      <View style={{ flex: 1}}>
-        <Home />
-      </View>
-    );
-}
-
-function Categories() {
-    return (
-      <View style={{ flex: 1 }}>
-        <ProductList />
-      </View>
-    );
-}
-
-function AboutUs() {
-  return (
-    <View style={{ flex: 1 }}>
-      <ContactUs />
-    </View>
-  );
-}
-  
 const Account = () => {
     return (
       <Stack.Navigator>
@@ -96,12 +73,44 @@ const ProfileScreen = ({ navigation, route }) => {
 };
 
 export default class TabBar extends Component {
+    DetailScreen = () => {
+      return (
+        <Stack.Navigator 
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#4d95c6',
+            },
+            headerTintColor: '#fff',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        >
+          <Stack.Screen 
+            name="ProductList" 
+            component={ProductList} 
+            options={{
+              headerTitle: 'Danh sách sản phẩm',
+            }}
+          />
+          <Stack.Screen 
+            name="ProductDetail" 
+            component={ProductDetail} 
+            options={{
+              headerTitle: 'Chi tiết sản phẩm',
+            }}
+          />
+        </Stack.Navigator>
+      )
+    }
+
     render() {
       return (
         <Tab.Navigator>
             <Tab.Screen 
                 name="Home" 
-                component={HomeScreen} 
+                component={Home} 
                 options={{
                     tabBarLabel: 'Trang chủ',
                     tabBarIcon: ({ color, size }) => (
@@ -111,7 +120,7 @@ export default class TabBar extends Component {
             />
             <Tab.Screen 
                 name="Categories" 
-                component={Categories} 
+                children={this.DetailScreen} 
                 options={{
                     tabBarLabel: 'Danh Mục',
                     tabBarIcon: ({ color, size }) => (
@@ -121,7 +130,7 @@ export default class TabBar extends Component {
             />
             <Tab.Screen 
                 name="ContactUs" 
-                component={AboutUs}
+                component={ContactUs}
                 options={{
                     tabBarLabel: 'Liên hệ',
                     tabBarIcon: ({ color, size }) => (
