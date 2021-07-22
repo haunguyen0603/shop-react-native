@@ -8,10 +8,13 @@ import
     ScrollView,
     TouchableOpacity,
     SafeAreaView,
+    Dimensions,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Header from './Header';
 import DiscountProduct from './DiscountProduct.js';
+
+const { height } = Dimensions.get('window');
 
 export default class Home extends Component {
     constructor(props){
@@ -51,7 +54,7 @@ export default class Home extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Header />
+                {/* <Header /> */}
                 <ScrollView>
                     <Carousel
                     ref={(c) => { this._carousel = c; }}
@@ -86,7 +89,8 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.title}>Sản phẩm Khuyến mãi</Text>
-                    <DiscountProduct />
+                    {/* <Text>{console.log(this.props.navigation)}</Text> */}
+                    <DiscountProduct navigation={this.props.navigation} />
                 </ScrollView>
             </SafeAreaView>
 
@@ -98,6 +102,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
+        paddingTop: 25
     },
     title: {
         fontSize: 20,

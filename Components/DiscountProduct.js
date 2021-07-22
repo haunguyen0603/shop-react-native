@@ -64,7 +64,7 @@ export default class DiscountProduct extends Component {
     renderItem = ({item, index}) => {
         return (
             <View style={styles.item}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('ProductDetail', item)}>
                     <Image source={{uri:'http://192.168.1.7/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
                 </TouchableOpacity> 
                     <Text style={styles.title}>{item.name}</Text>

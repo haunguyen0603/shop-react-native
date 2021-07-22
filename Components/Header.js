@@ -6,12 +6,13 @@ import
     TextInput, 
     View,
     StyleSheet,
-    TouchableOpacity,
+    Image,
     StatusBar
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class Header extends Component {
 
@@ -20,17 +21,12 @@ export default class Header extends Component {
         return (
             <View style={styles.header}>
                 <View style={styles.headerRow1}>
-                    {/* <TouchableOpacity style={{alignContent: 'center'}}>
-                        <MaterialCommunityIcons name='chevron-left' size={36} />
-                    </TouchableOpacity> */}
                     <Text style={{ fontSize: 15, color: 'white', fontStyle: 'italic' }}>FreeShip</Text>
                     <Text style={styles.title}>Shop Thời Trang</Text>
-                    <TouchableOpacity>
-                        <MaterialCommunityIcons name='cart-outline' size={36} color='white'/>
-                    </TouchableOpacity>
+                    <Image style={{ width: 36, height: 36 }} source={{uri: './assets/favicon.png'}} />                   
                 </View>
                 <TextInput style={styles.textInput} placeholder="Tìm kiếm" />
-                <StatusBar style='auto' />
+                {/* <StatusBar style='auto' /> */}
             </View>
             
         )
@@ -39,13 +35,15 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     header: {
-        height: height / 8,
+        height: height / 7.5,
         backgroundColor: "#4d95c6",
+        width: width,
+        paddingTop: 25
     },
     headerRow1: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        marginVertical: 5,
+        // marginVertical: 5,
         marginHorizontal: 8
     },
     textInput: {
@@ -58,6 +56,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         color: 'white',
-        
+        fontWeight: 'bold'
     }
 })
