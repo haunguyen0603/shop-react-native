@@ -28,7 +28,7 @@ export default class Home extends Component {
     };
 
     getData = async () => {
-      fetch('http://192.168.43.236/shop/public/show-banner-api')
+      fetch('http://192.168.1.7/shop/public/show-banner-api')
       .then((response) => response.json())
       .then((json) => 
       {
@@ -44,7 +44,7 @@ export default class Home extends Component {
     renderItem = ({item, index}) => {
         return (
             <View style={{paddingTop: 10}}>
-                <Image source={{uri:'http://192.168.43.236/shop/public/' + item.image}} style={styles.banner} ></Image>
+                <Image source={{uri:'http://192.168.1.7/shop/public/' + item.image}} style={styles.banner} ></Image>
                 <Text>{item.title}</Text>
             </View>
         );
@@ -69,21 +69,21 @@ export default class Home extends Component {
                     <Text style={styles.title}>Danh mục sản phẩm</Text>
                     <View style={styles.rowType}>
                         <TouchableOpacity style={{alignItems: 'center'}}>
-                            <Image source={{uri: "http://192.168.43.236/shop/public/images/product-type/ao-unisex.jpg"}} style={styles.image} />
+                            <Image source={{uri: "http://192.168.1.7/shop/public/images/product-type/ao-unisex.jpg"}} style={styles.image} />
                             <Text style={{fontSize:15}}>Áo Unisex</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{alignItems: 'center'}}>
-                            <Image source={{uri: "http://192.168.43.236/shop/public/images/product-type/quan.jpg"}} style={styles.image} />
+                            <Image source={{uri: "http://192.168.1.7/shop/public/images/product-type/quan.jpg"}} style={styles.image} />
                             <Text style={{fontSize:15}}>Quần</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{alignItems: 'center'}}>
-                            <Image source={{uri: "http://192.168.43.236/shop/public/images/product-type/giay.jpg"}} style={styles.image} />
+                            <Image source={{uri: "http://192.168.1.7/shop/public/images/product-type/giay.jpg"}} style={styles.image} />
                             <Text style={{fontSize:15}}>Giày</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.rowType}>
                         <TouchableOpacity style={{alignItems: 'center'}}>
-                            <Image source={{uri: "http://192.168.43.236/shop/public/images/product-type/dong-ho.jpg"}} style={styles.image} />
+                            <Image source={{uri: "http://192.168.1.7/shop/public/images/product-type/dong-ho.jpg"}} style={styles.image} />
                             <Text style={{fontSize:15}}>Đồng hồ</Text>
                         </TouchableOpacity>
                     </View>
