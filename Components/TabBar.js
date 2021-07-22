@@ -60,15 +60,11 @@ const LoginScreen = ({ navigation }) => {
       
       <Button
         title="Đăng nhập"
-        onPress={() =>
-          navigation.replace('Profile')
-        }
+        onPress={() => navigation.replace('Profile')}
       />
       <Button
         title="Đăng ký"
-        onPress={() =>
-          navigation.navigate('Register')
-        }
+        onPress={() => navigation.navigate('Register')}
       />
     </>
   );
@@ -79,10 +75,8 @@ const RegisterScreen = ({ navigation }) => {
     <>
     <Register />
     <Button
-      title="Go to Login"
-      onPress={() =>
-        navigation.navigate('Login')
-      }
+      title="Tạo tài khoản"
+      onPress={() => navigation.navigate('Login')}
     />
     </>
   );
@@ -94,9 +88,7 @@ const ProfileScreen = ({ navigation, route }) => {
       <Text>This is profile</Text>
       <Button 
         title="Logout"
-        onPress={() =>
-        navigation.replace('Login')
-      } 
+        onPress={() => navigation.replace('Login')} 
       />  
     </View>
 
@@ -139,7 +131,7 @@ export default class TabBar extends Component {
             />
             <Tab.Screen 
                 name="Account"
-                component={Account}
+                children={Account}
                 options={{
                     tabBarLabel: 'Tài khoản',
                     tabBarIcon: ({ color, size }) => (
