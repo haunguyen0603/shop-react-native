@@ -28,7 +28,7 @@ export default class ProductList extends Component {
     };
 
     getData = async () => {
-      fetch('http://192.168.1.3/shop/public/show-product-api?page=' + this.state.page)
+      fetch('http://192.168.43.236/shop/public/show-product-api?page=' + this.state.page)
       .then((response) => response.json())
       .then((json) => 
       {
@@ -71,7 +71,7 @@ export default class ProductList extends Component {
 
     currencyFormat = (num) => {
       return 'VND ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-   }
+    }
 
     render(){
       return (
@@ -84,7 +84,7 @@ export default class ProductList extends Component {
               renderItem={({ item })=>(
               <View style={styles.item}>
                 <TouchableOpacity>
-                  <Image source={{uri:'http://192.168.1.3/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
+                  <Image source={{uri:'http://192.168.43.236/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
                 </TouchableOpacity> 
                 <Text style={styles.title}>{item.name}</Text>
                 <TouchableOpacity>
@@ -112,19 +112,20 @@ const styles = StyleSheet.create({
     item: {
       padding: 10,
       marginVertical: 5,
-      marginHorizontal: 8,
       flex: 0.5,
-      alignItems: 'center'
+      alignItems: 'center',
     },
     title: {
       fontSize: 15,
+      fontWeight: 'bold'
     },
     content:{
       fontSize: 13,
     },
     images:{
-      width:200,
-      height:200,
+      width:180,
+      height:180,
+      borderRadius: 8
     },
     loader: {
       marginTop: 10,

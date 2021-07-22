@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ProductList from './ProductList.js';
 import Home from './Home.js';
 import Profile from './Profile.js';
+import ContactUs from './ContactUs.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +24,14 @@ function Categories() {
         <ProductList />
       </View>
     );
+}
+
+function AboutUs() {
+  return (
+    <View style={{ flex: 1 }}>
+      <ContactUs />
+    </View>
+  );
 }
   
 function Account() {
@@ -59,7 +68,17 @@ export default class TabBar extends Component {
                         }}
                     />
                     <Tab.Screen 
-                        name="Profile"
+                        name="ContactUs" 
+                        component={AboutUs}
+                        options={{
+                            tabBarLabel: 'Liên hệ',
+                            tabBarIcon: ({ color, size }) => (
+                              <MaterialCommunityIcons name="phone-classic" color={color} size={size} />
+                            ),
+                        }}
+                    />
+                    <Tab.Screen 
+                        name="Account"
                         component={Account}
                         options={{
                             tabBarLabel: 'Tài khoản',
