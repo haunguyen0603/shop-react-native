@@ -1,5 +1,17 @@
 import React, { Component } from 'react'
-import { SafeAreaView, ScrollView, Text, View, StyleSheet, Dimensions, TextInput } from 'react-native'
+import 
+{ 
+    SafeAreaView, 
+    ScrollView, 
+    Text, 
+    View, 
+    StyleSheet, 
+    Dimensions, 
+    TextInput, 
+    TouchableOpacity 
+} from 'react-native';
+
+import { fireBaseApp } from './FireBaseConfig';
 
 const { width } = Dimensions.get('window');
 
@@ -13,6 +25,22 @@ export default class Register extends Component {
         }
     }
 
+    SignUp () {
+        fireBaseApp.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then((userCredential) => {
+            // Signed in 
+            // console.log(userCredential)
+            var user = userCredential.user;
+            this.setState({
+                email: '',
+                password: ''
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -20,7 +48,7 @@ export default class Register extends Component {
                     <TextInput 
                         style={styles.inputText} 
                         placeholder="Email"
-                        onChange={( email ) => this.setState({email})}
+                        onChangeText={( email ) => this.setState({email: email})}
                         value={this.state.email}
                     />
                 </View>
@@ -28,12 +56,12 @@ export default class Register extends Component {
                     <TextInput 
                         style={styles.inputText} 
                         placeholder="Password"
-                        onChange={( password ) => this.setState({password})}
+                        onChangeText={( password ) => this.setState({password: password})}
                         value={this.state.password}
                         secureTextEntry={true}
                     />
                 </View>
-                <View style={{paddingBottom: 20}}>
+                {/* <View style={{paddingBottom: 20}}>
                     <TextInput 
                         style={styles.inputText} 
                         placeholder="Re-Password"
@@ -41,7 +69,10 @@ export default class Register extends Component {
                         value={this.state.rePassword}
                         secureTextEntry={true}
                     />
-                </View>
+                </View> */}
+                <TouchableOpacity onPress={() => {this.SignUp()}}>
+                    <Text style={styles.content}>Đăng ký</Text>
+                </TouchableOpacity>
             </SafeAreaView>
         )
     }
