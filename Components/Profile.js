@@ -17,7 +17,18 @@ export default class Profile extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Welcome</Text>
+                <View style={styles.avatar}><MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
+                    {/* <Text>{console.log(this.props.route.params)}</Text> */}
+                    <Text style={styles.title}>Xin chào {this.props.route.params.email}</Text>
+                </View>
+                {/* <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style={styles.content}>Đăng nhập</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
+                        <Text style={styles.content}>Đăng ký</Text>
+                    </TouchableOpacity>
+                </View> */}
             </SafeAreaView>
         )
     }
@@ -26,12 +37,19 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        marginHorizontal: 10,
+        backgroundColor: '#fff'
     },
-    header: {
-        height: height / 8,
-        backgroundColor: "#4d95c6",
+    avatar: {
+        height: height * 0.2,
         justifyContent: 'center',
+        alignItems: 'center'
+    },
+    content: {
+        color: 'blue',
+    },
+    title: {
+        fontSize: 20,
         alignItems: 'center'
     }
 })

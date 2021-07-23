@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { version } from 'react'
 import 
 { 
     Text, 
@@ -28,23 +27,34 @@ export default class Login extends Component {
         fireBaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((userCredential) => {
             // Signed in 
-            // console.log(userCredential)
+            // console.log(userCredential.user)
+            var user = userCredential.user;
             Alert.alert('Thông báo', 'Đăng nhập thành công!', [
-                {text: 'OK', onPress: () => this.props.navigation.replace('Profile')}
+                {text: 'OK', onPress: () => this.props.navigation.replace('Profile', user)}
             ], 
                 {cancelable: false}
             )
-            var user = userCredential.user;
-
+            
             this.setState({
                 email: '',
                 password: ''
             })
         })
         .catch((error) => {
-            console.log(error);
-            Alert.alert('Thông báo', 'Đăng nhập thất bại!',[
-                {text: 'Cancel', onPress: () =>console.log('Cancel Press'), style: 'cancel'}
+            console.log(error.code);
+
+            var msg = "Đăng nhập thất bại!";
+
+            if (error.code === "auth/invalid-email"){
+                msg = "Email không đúng định dạng!"
+            } else if (error.code === "auth/user-not-found"){
+                msg = "Không tìm thấy email đăng ký!"
+            } else if (error.code === "auth/wrong-password"){
+                msg = "Sai password, vui lòng thử lại!"
+            }
+            
+            Alert.alert('Thông báo', msg ,[
+                {text: 'Cancel', style: 'cancel'}
             ], 
                 {cancelable: false}
             )
@@ -74,9 +84,7 @@ export default class Login extends Component {
                 <TouchableOpacity style={styles.loginButton} onPress={() => this.Login()}>
                     <Text style={styles.content}>Đăng Nhập</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                    onPress={() => {this.props.navigation.navigate('Register')}}
-                >
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate('Register')}}>
                     <Text style={styles.signUpButton}>Bạn chưa có tài khoản? Đăng ký ngay</Text>
                 </TouchableOpacity>
             </SafeAreaView>

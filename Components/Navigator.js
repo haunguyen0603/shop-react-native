@@ -11,6 +11,7 @@ import Login from './Login.js';
 import Register from './Register.js';
 import Header from './Header.js';
 import Cart from './Cart.js';
+import { fireBaseApp } from './FireBaseConfig.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,7 +25,7 @@ currencyFormat = (num) => {
     return (
         <View style={styles.container}>
             <ScrollView>
-            <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
+            <Image source={{uri: 'http://192.168.43.236/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
             <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
             <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
             <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
@@ -96,7 +97,10 @@ export default class Navigator extends Component {
                         <MaterialCommunityIcons name="cart-outline" color={color} size={size} />
                         ),
                     }}
-                />
+                >
+                    {/* Stack Screen here */}
+                    
+                </Tab.Screen>
                 <Tab.Screen 
                     name="ContactUs" 
                     component={ContactUs}
@@ -107,16 +111,60 @@ export default class Navigator extends Component {
                         ),
                     }}
                 />
-                <Tab.Screen 
+                {/* <Tab.Screen 
                     name="Account"
-                    component={Login}
+                    component={Profile}
                     options={{
                         tabBarLabel: 'Tài khoản',
                         tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons name="account" color={color} size={size} />
                         ),
                     }}
-                />
+                /> */}
+                <Tab.Screen name="Account"
+                    options={{
+                        tabBarLabel: 'Tài khoản',
+                        tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        ),
+                    }}
+                >
+                    {() => (
+                        <Stack.Navigator
+                            screenOptions={{
+                                headerStyle: {
+                                backgroundColor: '#4d95c6',
+                                },
+                                headerTintColor: '#fff',
+                                headerTitleAlign: 'center',
+                            }}
+                        >
+                            <Stack.Screen 
+                                name="Login" 
+                                component={Login} 
+                                options={{
+                                    // headerTitle: "Đăng nhập ứng dụng",
+                                    headerShown: false
+                                }} 
+                            />
+                            <Stack.Screen 
+                                name="Profile" 
+                                component={Profile} 
+                                options={({ navigation, route }) => ({
+                                    headerTitle: "Thông tin cá nhân",
+
+                                })}
+                            />
+                            <Stack.Screen 
+                                name="Register" 
+                                component={Register} 
+                                options={{
+                                    headerTitle: "Đăng ký thành viên",
+                                }}
+                            />
+                        </Stack.Navigator>
+                    )}
+                </Tab.Screen>
             </Tab.Navigator>
         )
     }
@@ -136,7 +184,8 @@ export default class Navigator extends Component {
                     name="Home"
                     component={this.HomeTab} 
                     options={{
-                        headerTitle: props => <Header />
+                        // headerTitle: props => <Header />
+                        headerTitle: "Shop thời trang"
                     }}
                 />
                 <Stack.Screen 
@@ -146,7 +195,7 @@ export default class Navigator extends Component {
                         headerTitle: 'Chi tiết sản phẩm',
                     }}
                 />
-                <Stack.Screen 
+                {/* <Stack.Screen 
                     name="Login" 
                     component={Login} 
                     options={{
@@ -166,7 +215,7 @@ export default class Navigator extends Component {
                     options={{
                         headerTitle: 'Tài khoản',
                     }}
-                />
+                /> */}
                 
             </Stack.Navigator>
         )
