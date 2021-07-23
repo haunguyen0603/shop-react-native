@@ -101,9 +101,9 @@ const styles = StyleSheet.create({
     },
     inputText: {
         borderWidth: 1.5,
-        borderRadius: 7,
+        borderRadius: 10,
         backgroundColor: '#fff',
-        height: 40,
+        height: 50,
         width: width * 0.9,
         padding: 10
     },
@@ -112,11 +112,12 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     SignUpButton: {
-        backgroundColor: 'green',
+        backgroundColor: '#20b2aa',
         padding: 10,
         height: 40,
         width: width * 0.9,
-        borderRadius: 10,
-        alignItems: 'center'
+        borderRadius: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })

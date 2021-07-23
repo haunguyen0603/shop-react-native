@@ -105,14 +105,16 @@ export default class ProductList extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "white",
-      // marginTop: StatusBar.currentHeight || 0,
+      // backgroundColor: "white",
     },
     item: {
       padding: 10,
       marginVertical: 5,
+      marginHorizontal: 5,
       flex: 0.5,
       alignItems: 'center',
+      backgroundColor: "#ffffff",
+      borderRadius: 10,
     },
     title: {
       fontSize: 15,
@@ -130,4 +132,4 @@ const styles = StyleSheet.create({
       marginTop: 10,
       alignItems: 'center'
     }
-  });
+});

@@ -10,6 +10,7 @@ import ContactUs from './ContactUs.js';
 import Login from './Login.js';
 import Register from './Register.js';
 import Header from './Header.js';
+import Cart from './Cart.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -21,16 +22,19 @@ currencyFormat = (num) => {
   const ProductDetailUI = ({ route, navigation }) => {
     // console.log(route.params)
     return (
-        <ScrollView style={styles.container}>
-          <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
-          <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
-          <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
-          <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
-          <Text style={styles.title}>Mô tả sản phẩm:</Text>
-          <Text style={styles.content}>{route.params.description}</Text>
-          <Button title="Thêm giỏ hàng" />
-        </ScrollView>
-        
+        <View style={styles.container}>
+            <ScrollView>
+            <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
+            <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
+            <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
+            <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
+            <Text style={styles.title}>Mô tả sản phẩm:</Text>
+            <Text style={styles.content}>{route.params.description}</Text>
+            </ScrollView>
+            <View>
+                <Button title="Thêm giỏ hàng" />
+            </View>
+        </View>
     )
   }
   
@@ -85,7 +89,7 @@ export default class Navigator extends Component {
                 />
                 <Tab.Screen 
                     name="Cart" 
-                    component={ProductList} 
+                    component={Cart} 
                     options={{
                         tabBarLabel: 'Giỏ hàng',
                         tabBarIcon: ({ color, size }) => (
@@ -129,11 +133,10 @@ export default class Navigator extends Component {
                 }}
             >
                 <Stack.Screen 
-                    name="Home" 
+                    name="Home"
                     component={this.HomeTab} 
                     options={{
-                        // headerTitle: props => <Header />
-                        headerTitle: "Shop thời trang"
+                        headerTitle: props => <Header />
                     }}
                 />
                 <Stack.Screen 

@@ -11,7 +11,6 @@ import
     Dimensions,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import Header from './Header';
 import DiscountProduct from './DiscountProduct.js';
 
 const { height } = Dimensions.get('window');
