@@ -9,26 +9,11 @@ import
     SafeAreaView,
     TouchableOpacity,
     Dimensions,
-    Button,
+    Alert,
 } from 'react-native'
-import Register from './Register';
-import { createStackNavigator } from '@react-navigation/stack';
-import Profile from './Profile';
+import { fireBaseApp } from './FireBaseConfig';
 
-const Stack = createStackNavigator();
 const { width } = Dimensions.get('window');
-
-function ProfileUI() {
-    return (
-        <Profile />
-    );
-}
-
-function RegisterUI() {
-    return (
-        <Register />
-    );
-}
 
 export default class Login extends Component {
     constructor(props){
@@ -37,6 +22,33 @@ export default class Login extends Component {
             email: '',
             password: '',
         }
+    }
+
+    Login () {
+        fireBaseApp.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((userCredential) => {
+            // Signed in 
+            // console.log(userCredential)
+            Alert.alert('Thông báo', 'Đăng nhập thành công!', [
+                {text: 'OK', onPress: () => this.props.navigation.replace('Profile')}
+            ], 
+                {cancelable: false}
+            )
+            var user = userCredential.user;
+
+            this.setState({
+                email: '',
+                password: ''
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+            Alert.alert('Thông báo', 'Đăng nhập thất bại!',[
+                {text: 'Cancel', onPress: () =>console.log('Cancel Press'), style: 'cancel'}
+            ], 
+                {cancelable: false}
+            )
+        });
     }
 
     render() {
@@ -59,7 +71,7 @@ export default class Login extends Component {
                         secureTextEntry={true}
                     />
                 </View>
-                <TouchableOpacity style={styles.loginButton}>
+                <TouchableOpacity style={styles.loginButton} onPress={() => this.Login()}>
                     <Text style={styles.content}>Đăng Nhập</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 

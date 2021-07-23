@@ -163,6 +163,13 @@ export default class TabBar extends Component {
               headerTitle: 'Đăng ký thành viên',
             }}
           />
+          <Stack.Screen 
+            name="Profile" 
+            component={Profile}
+            options={{
+              headerTitle: 'Tài khoản',
+            }}
+          />
         </Stack.Navigator>
       )
     };

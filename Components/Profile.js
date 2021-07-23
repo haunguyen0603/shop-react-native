@@ -17,17 +17,7 @@ export default class Profile extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <MaterialCommunityIcons name='account-circle' size={48} color='white' />
-                    <View style={{flexDirection: 'row', padding:5}}>
-                        <TouchableOpacity>
-                            <Text style={{paddingHorizontal:5, fontSize:20}}>Đăng nhập</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={{paddingHorizontal:5, fontSize:20}}>Đăng ký</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Text>Welcome</Text>
             </SafeAreaView>
         )
     }
