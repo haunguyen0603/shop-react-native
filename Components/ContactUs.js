@@ -13,17 +13,16 @@ import
     TouchableOpacity,
 } from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
-import Header from './Header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class ContactUs extends Component {
 
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <Header />
                 <ScrollView>
                     <View style={styles.layoutView}>
                         <MapView
@@ -53,7 +52,7 @@ export default class ContactUs extends Component {
                         <TextInput style={styles.input} placeholder="Điền Email cá nhân" />
                         <TextInput style={styles.input} placeholder="Tiêu đề" />
                         <TextInput style={styles.input} placeholder="Tin nhắn của bạn" />
-                        <TouchableOpacity style={{justifyContent:'center', alignItems:'center'}}>
+                        <TouchableOpacity style={styles.buttonSend}>
                             <Text style={styles.title}><MaterialCommunityIcons name='email-send' size={24} color='#4d95c6' /> GỬI TỚI CHÚNG TÔI</Text>
                         </TouchableOpacity>
                     </View>
@@ -93,5 +92,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         padding: 10,
         marginTop: 15
+    },
+    buttonSend: {
+        justifyContent:'center', 
+        alignItems:'center', 
+        paddingTop: 30
     }
 })

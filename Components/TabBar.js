@@ -14,47 +14,6 @@ import Header from './Header.js';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const Account = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-      </Stack.Navigator>
-    );
-}
-
-const RegisterScreen = ({ navigation }) => {
-  return (
-    <>
-    <Register />
-    <Button
-      title="Tạo tài khoản"
-      onPress={() => navigation.navigate('Login')}
-    />
-    </>
-  );
-};
-
-const ProfileScreen = ({ navigation, route }) => {
-  return (
-    <View>
-      <Text>This is profile</Text>
-      <Button 
-        title="Logout"
-        onPress={() => navigation.replace('Login')} 
-      />  
-    </View>
-
-  );
-};
-
 currencyFormat = (num) => {
   return 'VND ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
@@ -62,19 +21,43 @@ currencyFormat = (num) => {
 const ProductDetailUI = ({ route, navigation }) => {
   // console.log(route.params)
   return (
-      <ScrollView style={{flex: 1, backgroundColor: '#fff', paddingHorizontal:15}}>
-
-          <Text style={{fontSize: 20, fontWeight:'bold', alignItems: 'center'}}>Tên sản phẩm: {route.params.name}</Text>
-          <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 500, width: 400}} />
-          <Text style={{fontSize:20, fontWeight:'bold'}}>Giá: {currencyFormat(route.params.unit_price)}</Text>
-          <Text style={{fontSize:20, fontWeight:'bold', color: 'red'}}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
-          <Text style={{fontSize:15, fontWeight:'bold'}}>Chi tiết sản phẩm:</Text>
-          <Text style={{fontSize:13}}>{route.params.description}</Text>
-
+      <ScrollView style={styles.container}>
+        <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
+        <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
+        <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
+        <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
+        <Text style={styles.title}>Mô tả sản phẩm:</Text>
+        <Text style={styles.content}>{route.params.description}</Text>
+        <Button title="Thêm giỏ hàng" />
       </ScrollView>
       
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    backgroundColor: '#fff', 
+    paddingHorizontal: 15,
+  },
+  promotion: {
+    fontSize: 20, 
+    // fontWeight:'bold',
+    fontStyle: 'italic',
+    paddingTop: 20,
+    color: 'red',
+    paddingTop: 20
+  },
+  title: {
+    fontSize: 20, 
+    fontWeight:'bold', 
+    paddingTop: 20,
+  },
+  content: {
+    fontSize:15,
+    paddingVertical: 20
+  }
+})
 
 export default class TabBar extends Component {
     DetailScreen = () => {

@@ -4,6 +4,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import TabBar from './Components/TabBar.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Navigator from './Components/Navigator.js';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      <TabBar />
+      <Navigator />
 
     </NavigationContainer>
   );
