@@ -8,7 +8,8 @@ import
     StyleSheet, 
     Dimensions, 
     TextInput, 
-    TouchableOpacity 
+    TouchableOpacity, 
+    Alert
 } from 'react-native';
 
 import { fireBaseApp } from './FireBaseConfig';
@@ -30,7 +31,14 @@ export default class Register extends Component {
         .then((userCredential) => {
             // Signed in 
             // console.log(userCredential)
+            Alert.alert('Thông báo', 'Đăng ký thành công!' + this.state.email, [
+                {text: 'Cancel', onPress: () => console.log('Cancel Press'), style: 'cancel'},
+                {text: 'OK', onPress: () => this.props.navigation.navigate('Login')}
+            ], 
+                {cancelable: false}
+            )
             var user = userCredential.user;
+
             this.setState({
                 email: '',
                 password: ''
@@ -38,6 +46,11 @@ export default class Register extends Component {
         })
         .catch((error) => {
             console.log(error);
+            Alert.alert('Thông báo', error,[
+                {text: 'Cancel', onPress: () =>console.log('Cancel Press'), style: 'cancel'}
+            ], 
+                {cancelable: false}
+            )
         });
     }
 
@@ -70,8 +83,8 @@ export default class Register extends Component {
                         secureTextEntry={true}
                     />
                 </View> */}
-                <TouchableOpacity onPress={() => {this.SignUp()}}>
-                    <Text style={styles.content}>Đăng ký</Text>
+                <TouchableOpacity onPress={() => {this.SignUp()}} style={styles.SignUpButton}>
+                    <Text style={styles.content}>Đăng ký ngay</Text>
                 </TouchableOpacity>
             </SafeAreaView>
         )
@@ -83,17 +96,27 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#4d95c6'
+        backgroundColor: '#fff',
+        padding: 20
     },
     inputText: {
-        padding: 10,
+        borderWidth: 1.5,
         borderRadius: 7,
         backgroundColor: '#fff',
         height: 40,
-        width: width*0.9,
+        width: width * 0.9,
+        padding: 10
     },
     content: {
         fontSize: 15,
         color: '#fff'
     },
+    SignUpButton: {
+        backgroundColor: 'green',
+        padding: 10,
+        height: 40,
+        width: width * 0.9,
+        borderRadius: 10,
+        alignItems: 'center'
+    }
 })

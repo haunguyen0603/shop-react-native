@@ -30,23 +30,6 @@ const Account = () => {
     );
 }
 
-const LoginScreen = ({ navigation }) => {
-  return (
-    <>
-    <Login />
-      
-      <Button
-        title="Đăng nhập"
-        onPress={() => navigation.replace('Profile')}
-      />
-      <Button
-        title="Đăng ký"
-        onPress={() => navigation.navigate('Register')}
-      />
-    </>
-  );
-};
-
 const RegisterScreen = ({ navigation }) => {
   return (
     <>
@@ -155,6 +138,35 @@ export default class TabBar extends Component {
       )
     }
 
+    LoginScreen = () => {
+      return (
+        <Stack.Navigator 
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: '#4d95c6',
+              },
+              headerTintColor: '#fff',
+              headerTitleAlign: 'center',
+            }}
+          >
+          <Stack.Screen 
+            name="Login" 
+            component={Login} 
+            options={{
+              headerTitle: "Đăng nhập ứng dụng"
+            }}
+          />
+          <Stack.Screen 
+            name="Register" 
+            component={Register}
+            options={{
+              headerTitle: 'Đăng ký thành viên',
+            }}
+          />
+        </Stack.Navigator>
+      )
+    };
+
     render() {
       return (
         <Tab.Navigator>
@@ -200,7 +212,7 @@ export default class TabBar extends Component {
             />
             <Tab.Screen 
                 name="Account"
-                children={Account}
+                children={this.LoginScreen}
                 options={{
                     tabBarLabel: 'Tài khoản',
                     tabBarIcon: ({ color, size }) => (
