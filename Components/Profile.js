@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 
 { 
-    SafeAreaView, 
     Text, 
     View, 
     StyleSheet,
@@ -9,14 +8,67 @@ import
     TouchableOpacity,
     Button,
     Alert,
-
+    TextInput,
+    ScrollView,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { fireBaseApp } from './FireBaseConfig';
 
 const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window')
+
+SignedScreen = () => {
+    return (
+        <View style={styles.container}>
+            <ScrollView >
+                <View style={styles.avatar}>
+                    <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
+                    <Text>{console.log(this.props.route.params)}</Text>
+                    {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
+                    <Text style={styles.title}>Xin chào {this.state.user}</Text>
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 15}}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                        <Text style={styles.content}>Đăng nhập</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
+                        <Text style={styles.content}>Đăng ký</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.row}>
+                    <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />
+                    <TextInput placeholder="Họ và tên" style={styles.inputText} />
+                </View>
+                <View style={styles.row}>
+                    <MaterialCommunityIcons name="card-account-details-outline" size={36} color='#b0e0e6' />
+                    <TextInput placeholder="Địa chỉ" style={styles.inputText} />
+                </View>
+                <View style={styles.row}>
+                    <MaterialCommunityIcons name="cellphone-iphone" size={36} color='#b0e0e6' />
+                    <TextInput placeholder="Số điện thoại" style={styles.inputText} keyboardType="phone-pad" />
+                </View>
+                <View style={styles.row}>
+                    <MaterialCommunityIcons name="history" size={36} color='#90ee90' />
+                    <TouchableOpacity>
+                        <Text style={styles.buttonLine}>Lịch sử đặt hàng</Text>
+                    </TouchableOpacity>
+                </View>
+                
+            </ScrollView>
+            <Button title="Đăng xuất" color="#dc143c" />
+        </View>
+    )
+}
 
 export default class Profile extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            user: '',
+
+        }
+    }
+
     logOut () {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
@@ -31,21 +83,25 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.avatar}><MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                    <Text>{console.log(this.props.route.params)}</Text>
-                    {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
-                </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                        <Text style={styles.content}>Đăng nhập</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
-                        <Text style={styles.content}>Đăng ký</Text>
-                    </TouchableOpacity>
-                </View>
-                {/* <Button title="Đăng xuất" onPress={() => this.logOut()} color="#dc143c" /> */}
-            </SafeAreaView>
+            <View style={styles.container}>
+                <ScrollView >
+                    <View style={styles.avatar}>
+                        <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
+                        <Text>{console.log(this.props.route.params)}</Text>
+                        {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
+                        <Text style={styles.title}>Xin chào {this.state.user}</Text>
+                    </View>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 15}}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                            <Text style={styles.content}>Đăng nhập</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
+                            <Text style={styles.content}>Đăng ký</Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                </ScrollView>
+            </View>
         )
     }
 }
@@ -53,19 +109,41 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginHorizontal: 10,
         backgroundColor: '#fff'
     },
     avatar: {
-        height: height * 0.2,
+        height: height * 0.3,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 15
     },
     content: {
         color: 'blue',
+        fontSize: 15
     },
     title: {
         fontSize: 20,
         alignItems: 'center'
-    }
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginHorizontal: 5,
+        marginVertical: 10
+    },
+    buttonLine: {
+        borderRadius: 20,
+        backgroundColor: '#90ee90',
+        height: 40,
+        width: width * 0.8,
+        padding: 10,
+        color: '#000080'
+    },
+    inputText: {
+        borderRadius: 10,
+        backgroundColor: '#b0e0e6',
+        height: 40,
+        width: width * 0.8,
+        padding: 10
+    },
 })

@@ -12,6 +12,7 @@ import Register from './Register.js';
 import Header from './Header.js';
 import Cart from './Cart.js';
 import { fireBaseApp } from './FireBaseConfig.js';
+import Account from './Account.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -155,13 +156,14 @@ export default class Navigator extends Component {
                                     headerShown: false
                                 })}
                             />
-                            {/* <Stack.Screen 
-                                name="Register" 
-                                component={Register} 
-                                options={{
-                                    headerTitle: "Đăng ký thành viên",
-                                }}
-                            /> */}
+                            <Stack.Screen 
+                                name="Privacy" 
+                                component={Account} 
+                                options={({ navigation, route }) => ({
+                                    headerTitle: "Welcome",
+                                    headerShown: false
+                                })}
+                            />
                         </Stack.Navigator>
                     )}
                 </Tab.Screen>
