@@ -8,9 +8,13 @@ import
   Text, 
   TouchableOpacity, 
   View, 
-  ActivityIndicator 
+  ActivityIndicator,
+  Dimensions,
+  TextInput,
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+const { height } = Dimensions.get('window');
 
 export default class ProductList extends Component {
     constructor(props){
@@ -35,18 +39,7 @@ export default class ProductList extends Component {
           this.setState({
             dataSource: this.state.dataSource.concat(json),
             isLoading: false
-          });
-          // if (json.length != 0){
-          //   this.setState({
-          //     dataSource: this.state.dataSource.concat(json),
-          //     isLoading: false
-          //   });
-          // } else {
-          //   Alert.alert('THÔNG BÁO', 'Đã hết sản phẩm', [
-          //     {text: 'OK', onPress: () => console.log('OK')}
-          //   ])
-          // }
-          
+          }); 
       })
       .catch((error) => {console.log(error);
       })
@@ -75,8 +68,9 @@ export default class ProductList extends Component {
     render(){
       return (
         <SafeAreaView style={styles.container}>
-          {/* <Text style={{ fontSize:20, marginHorizontal:8 }}>Tất cả Sản phẩm</Text> */}
-          {/* <Header /> */}
+          <View style={{margin: 5, backgroundColor: '#fff'}}>
+            <TextInput style={styles.searchBar} placeholder="Tìm kiếm" />
+          </View>
           <FlatList
               numColumns={2}
               data={this.state.dataSource}
@@ -134,5 +128,10 @@ const styles = StyleSheet.create({
     loader: {
       marginTop: 10,
       alignItems: 'center'
-    }
+    },
+    searchBar: {
+      marginHorizontal: 8,
+      height: height / 20,
+      paddingLeft: 10,
+    },
 });
