@@ -20,13 +20,9 @@ export default class Header extends Component {
     render() {
         return (
             <View style={styles.header}>
-                <View style={styles.headerRow1}>
-                    <Text style={{ fontSize: 15, color: 'white', fontStyle: 'italic' }}>FreeShip</Text>
-                    <Text style={styles.title}>Shop Thời Trang</Text>
-                    <Image style={{ width: 36, height: 36 }} source={{uri: './assets/favicon.png'}} />                   
-                </View>
-                <TextInput style={styles.textInput} placeholder="Tìm kiếm" />
-                {/* <StatusBar style='auto' /> */}
+                <Image style={{ width: 50, height: 50 }} source={require('../assets/logo.png')} />
+                <Text style={styles.title}>Shop Thời Trang</Text>
+                <Text style={{ fontSize: 15, color: 'white', fontStyle: 'italic' }}>FreeShip</Text>                  
             </View>
             
         )
@@ -35,16 +31,20 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
     header: {
-        height: height / 7.5,
-        backgroundColor: "#4d95c6",
-        width: width,
-        paddingTop: 25
-    },
-    headerRow1: {
         flexDirection: "row",
         justifyContent: 'space-between',
+        alignItems: 'center',
+        height: height / 9,
+        width: width,
+        backgroundColor: "#4d95c6",
+        paddingTop: 25,
+        marginHorizontal: 8,
+        marginVertical: 5,
+    },
+    headerRow1: {
+        
         // marginVertical: 5,
-        marginHorizontal: 8
+        
     },
     textInput: {
         marginHorizontal: 8,

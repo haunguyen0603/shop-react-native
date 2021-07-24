@@ -139,29 +139,29 @@ export default class Navigator extends Component {
                                 headerTitleAlign: 'center',
                             }}
                         >
-                            <Stack.Screen 
+                            {/* <Stack.Screen 
                                 name="Login" 
                                 component={Login} 
                                 options={{
-                                    // headerTitle: "Đăng nhập ứng dụng",
+                                    headerTitle: "Đăng nhập ứng dụng",
                                     headerShown: false
                                 }} 
-                            />
+                            /> */}
                             <Stack.Screen 
                                 name="Profile" 
                                 component={Profile} 
                                 options={({ navigation, route }) => ({
                                     headerTitle: "Thông tin cá nhân",
-
+                                    headerShown: false
                                 })}
                             />
-                            <Stack.Screen 
+                            {/* <Stack.Screen 
                                 name="Register" 
                                 component={Register} 
                                 options={{
                                     headerTitle: "Đăng ký thành viên",
                                 }}
-                            />
+                            /> */}
                         </Stack.Navigator>
                     )}
                 </Tab.Screen>
@@ -184,8 +184,11 @@ export default class Navigator extends Component {
                     name="Home"
                     component={this.HomeTab} 
                     options={{
-                        // headerTitle: props => <Header />
-                        headerTitle: "Shop thời trang"
+                        headerTitle: "Shop Thời Trang",
+                        headerLeft: () => (
+                            <Image style={{width:50, height:50, marginLeft:10}} source={require("../assets/logo.png")} />
+                        ),
+                        headerRight: () => (<Text style={{fontSize:15, fontStyle:'italic', color:'#fff', marginRight:10}}>FreeShip</Text>),
                     }}
                 />
                 <Stack.Screen 
@@ -195,7 +198,7 @@ export default class Navigator extends Component {
                         headerTitle: 'Chi tiết sản phẩm',
                     }}
                 />
-                {/* <Stack.Screen 
+                <Stack.Screen 
                     name="Login" 
                     component={Login} 
                     options={{
@@ -209,7 +212,7 @@ export default class Navigator extends Component {
                         headerTitle: 'Đăng ký thành viên',
                     }}
                 />
-                <Stack.Screen 
+                {/* <Stack.Screen 
                     name="Profile" 
                     component={Profile}
                     options={{

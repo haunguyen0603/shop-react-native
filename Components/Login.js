@@ -31,7 +31,7 @@ export default class Login extends Component {
             // console.log(userCredential.user)
             var user = userCredential.user;
             Alert.alert('Thông báo', 'Đăng nhập thành công!', [
-                {text: 'OK', onPress: () => this.props.navigation.replace('Profile', user)}
+                {text: 'OK', onPress: () => this.props.navigation.navigate('Profile', user)}
             ], 
                 {cancelable: false}
             )

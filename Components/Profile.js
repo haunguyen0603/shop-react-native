@@ -21,7 +21,7 @@ export default class Profile extends Component {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
             Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
-                {text: 'OK', style: "default", onPress: () => this.props.navigation.replace('Login')}
+                {text: 'OK', style: "default", onPress: () => this.props.navigation.navigate('Profile')}
             ])
         }).catch((error) => {
             // An error happened.
@@ -33,18 +33,18 @@ export default class Profile extends Component {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.avatar}><MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                    {/* <Text>{console.log(this.props.route.params)}</Text> */}
-                    <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : this.props.route.params.email}</Text>
+                    <Text>{console.log(this.props.route.params)}</Text>
+                    {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
                 </View>
-                {/* <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
                         <Text style={styles.content}>Đăng nhập</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
                         <Text style={styles.content}>Đăng ký</Text>
                     </TouchableOpacity>
-                </View> */}
-                <Button title="Đăng xuất" onPress={() => this.logOut()} color="#dc143c" />
+                </View>
+                {/* <Button title="Đăng xuất" onPress={() => this.logOut()} color="#dc143c" /> */}
             </SafeAreaView>
         )
     }
