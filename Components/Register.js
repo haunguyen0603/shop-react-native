@@ -9,7 +9,8 @@ import
     Dimensions, 
     TextInput, 
     TouchableOpacity, 
-    Alert
+    Alert,
+    Image,
 } from 'react-native';
 
 import { fireBaseApp } from './FireBaseConfig';
@@ -57,6 +58,8 @@ export default class Register extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
+                <Image source={require('../assets/logo.png')} style={styles.logo} />
+                <Text style={styles.title}>Shop thời trang</Text>
                 <View style={{paddingBottom: 10}}>
                     <TextInput 
                         style={styles.inputText} 
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 20
+        // padding: 20
     },
     inputText: {
         borderWidth: 1.5,
@@ -119,5 +122,15 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    title: {
+        fontSize: 25,
+        fontStyle: 'italic',
+        color: '#1e90ff',
+        margin: 20
+    },
+    logo: {
+        height: 150,
+        width: 150,
     }
 })

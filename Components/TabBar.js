@@ -22,7 +22,7 @@ const ProductDetailUI = ({ route, navigation }) => {
   // console.log(route.params)
   return (
       <ScrollView style={styles.container}>
-        <Image source={{uri: 'http://192.168.43.236/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
+        <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
         <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
         <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
         <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
