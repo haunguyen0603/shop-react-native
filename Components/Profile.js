@@ -17,79 +17,16 @@ import { fireBaseApp } from './FireBaseConfig';
 const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window')
 
-SignedScreen = () => {
-    return (
-        <View style={styles.container}>
-            <ScrollView >
-                <View style={styles.avatar}>
-                    <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                    <Text>{console.log(this.props.route.params)}</Text>
-                    {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
-                    <Text style={styles.title}>Xin chào {this.state.user}</Text>
-                </View>
-                <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 15}}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                        <Text style={styles.content}>Đăng nhập</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
-                        <Text style={styles.content}>Đăng ký</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.row}>
-                    <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />
-                    <TextInput placeholder="Họ và tên" style={styles.inputText} />
-                </View>
-                <View style={styles.row}>
-                    <MaterialCommunityIcons name="card-account-details-outline" size={36} color='#b0e0e6' />
-                    <TextInput placeholder="Địa chỉ" style={styles.inputText} />
-                </View>
-                <View style={styles.row}>
-                    <MaterialCommunityIcons name="cellphone-iphone" size={36} color='#b0e0e6' />
-                    <TextInput placeholder="Số điện thoại" style={styles.inputText} keyboardType="phone-pad" />
-                </View>
-                <View style={styles.row}>
-                    <MaterialCommunityIcons name="history" size={36} color='#90ee90' />
-                    <TouchableOpacity>
-                        <Text style={styles.buttonLine}>Lịch sử đặt hàng</Text>
-                    </TouchableOpacity>
-                </View>
-                
-            </ScrollView>
-            <Button title="Đăng xuất" color="#dc143c" />
-        </View>
-    )
-}
-
 export default class Profile extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            user: '',
-
-        }
-    }
-
-    logOut () {
-        fireBaseApp.auth().signOut().then(() => {
-            // Sign-out successful.
-            Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
-                {text: 'OK', style: "default", onPress: () => this.props.navigation.navigate('Profile')}
-            ])
-        }).catch((error) => {
-            // An error happened.
-            console.log(error)
-        });
-    }
-
     render() {
         return (
             <View style={styles.container}>
+                <Text>{console.log(this.props.navigation)}</Text>
                 <ScrollView >
                     <View style={styles.avatar}>
                         <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                        <Text>{console.log(this.props.route.params)}</Text>
-                        {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName ? this.props.route.params.displayName : ""}</Text> */}
-                        <Text style={styles.title}>Xin chào {this.state.user}</Text>
+                        <Text style={styles.title}>Xin chào Khách!</Text>
+                        <Text style={styles.title}>Hãy đăng nhập để thấy những thông tin</Text>
                     </View>
                     <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 15}}>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
@@ -123,7 +60,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        fontStyle: 'italic',
+        color: "#90ee90"
     },
     row: {
         flexDirection: 'row',

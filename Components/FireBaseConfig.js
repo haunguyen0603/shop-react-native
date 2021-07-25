@@ -5,6 +5,7 @@ import * as firebase from "firebase";
 var firebaseConfig = {
 apiKey: "AIzaSyASv0cycADjl-2eYrhovmR1iXIRGOBi-c8",
 authDomain: "myshop-93998.firebaseapp.com",
+databaseURL: "https://myshop-93998-default-rtdb.asia-southeast1.firebasedatabase.app",
 projectId: "myshop-93998",
 storageBucket: "myshop-93998.appspot.com",
 messagingSenderId: "93783327011",

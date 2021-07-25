@@ -20,17 +20,14 @@ const { width } = Dimensions.get('window')
 export default class Account extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            user: '',
-
-        }
+        this.auth = fireBaseApp.auth().currentUser;
     }
 
     logOut () {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
             Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
-                {text: 'OK', style: "default", onPress: () => this.props.navigation.navigate('Profile')}
+                {text: 'OK', style: "default", onPress: () => this.props.navigation.replace('Profile')}
             ])
         }).catch((error) => {
             // An error happened.
@@ -45,8 +42,8 @@ export default class Account extends Component {
                     <View style={styles.avatar}>
                         <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
                         <Text>{console.log(this.props.route.params)}</Text>
-                        <Text style={styles.title}>Xin chào {this.props.route.params.displayName === null ? this.props.route.params.email : this.props.route.params.displayName}</Text>
-                        {/* <Text style={styles.title}>Xin chào {this.state.user}</Text> */}
+                        {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName === null ? this.props.route.params.email : this.props.route.params.displayName}</Text> */}
+                        <Text style={styles.title}>Xin chào {this.auth !== null ? this.auth.email : "" }!</Text>
                     </View>
                     <View style={styles.row}>
                         <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />

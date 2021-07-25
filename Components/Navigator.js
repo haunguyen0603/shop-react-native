@@ -66,6 +66,11 @@ currencyFormat = (num) => {
   })
 
 export default class Navigator extends Component {
+    constructor(props) {
+        super (props);
+        this.auth = fireBaseApp.auth().currentUser;
+    }
+
     HomeTab () {
         return (
             <Tab.Navigator>
@@ -112,16 +117,6 @@ export default class Navigator extends Component {
                         ),
                     }}
                 />
-                {/* <Tab.Screen 
-                    name="Account"
-                    component={Profile}
-                    options={{
-                        tabBarLabel: 'Tài khoản',
-                        tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
-                        ),
-                    }}
-                /> */}
                 <Tab.Screen name="Account"
                     options={{
                         tabBarLabel: 'Tài khoản',
@@ -140,22 +135,24 @@ export default class Navigator extends Component {
                                 headerTitleAlign: 'center',
                             }}
                         >
-                            {/* <Stack.Screen 
-                                name="Login" 
-                                component={Login} 
-                                options={{
-                                    headerTitle: "Đăng nhập ứng dụng",
-                                    headerShown: false
-                                }} 
-                            /> */}
                             <Stack.Screen 
                                 name="Profile" 
                                 component={Profile} 
-                                options={({ navigation, route }) => ({
+                                options={() => ({
                                     headerTitle: "Thông tin cá nhân",
                                     headerShown: false
                                 })}
                             />
+                        {this.auth === null ? (
+                            <Stack.Screen 
+                                name="Profile" 
+                                component={Profile} 
+                                options={() => ({
+                                    headerTitle: "Thông tin cá nhân",
+                                    headerShown: false
+                                })}
+                            />
+                        ) : (
                             <Stack.Screen 
                                 name="Privacy" 
                                 component={Account} 
@@ -164,6 +161,7 @@ export default class Navigator extends Component {
                                     headerShown: false
                                 })}
                             />
+                        )}     
                         </Stack.Navigator>
                     )}
                 </Tab.Screen>
