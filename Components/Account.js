@@ -27,7 +27,7 @@ export default class Account extends Component {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
             Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
-                {text: 'OK', style: "default", onPress: () => this.props.navigation.replace('Profile')}
+                {text: 'OK', style: "default", onPress: () => this.props.navigation.navigate('Home')}
             ])
         }).catch((error) => {
             // An error happened.
@@ -41,7 +41,6 @@ export default class Account extends Component {
                 <ScrollView >
                     <View style={styles.avatar}>
                         <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                        <Text>{console.log(this.props.route.params)}</Text>
                         {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName === null ? this.props.route.params.email : this.props.route.params.displayName}</Text> */}
                         <Text style={styles.title}>Xin chào {this.auth !== null ? this.auth.email : "" }!</Text>
                     </View>

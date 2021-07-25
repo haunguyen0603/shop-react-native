@@ -66,11 +66,6 @@ currencyFormat = (num) => {
   })
 
 export default class Navigator extends Component {
-    constructor(props) {
-        super (props);
-        this.auth = fireBaseApp.auth().currentUser;
-    }
-
     HomeTab () {
         return (
             <Tab.Navigator>
@@ -135,15 +130,15 @@ export default class Navigator extends Component {
                                 headerTitleAlign: 'center',
                             }}
                         >
-                            <Stack.Screen 
+                            {/* <Stack.Screen 
                                 name="Profile" 
                                 component={Profile} 
                                 options={() => ({
                                     headerTitle: "Thông tin cá nhân",
                                     headerShown: false
                                 })}
-                            />
-                        {this.auth === null ? (
+                            /> */}
+                        {fireBaseApp.auth().currentUser === null ? (
                             <Stack.Screen 
                                 name="Profile" 
                                 component={Profile} 

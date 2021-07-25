@@ -76,6 +76,7 @@ export default class ProductList extends Component {
             productName: item.name,
             productImage: item.image,
             productPrice: item.promotion_price === 0 ? item.unit_price : item.promotion_price,
+            productQty: 1
           })
 
         } else {

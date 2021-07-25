@@ -21,7 +21,7 @@ export default class Profile extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>{console.log(this.props.navigation)}</Text>
+                {/* <Text>{console.log(fireBaseApp.auth().currentUser)}</Text> */}
                 <ScrollView >
                     <View style={styles.avatar}>
                         <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
