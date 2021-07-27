@@ -78,16 +78,18 @@ export default class Cart extends Component {
     }
 
     deleteItem (key) {
-        fireBaseApp.auth().onAuthStateChanged((user) => {
+        var user = fireBaseApp.auth().currentUser.uid
             if (user) {
                 Alert.alert('THÔNG BÁO', 'Bạn muốn xóa chứ?', [
                     {text: 'Cancel', style: "cancel"},
-                    {text: 'OK', onPress: () => {this.itemRef.child(user.uid).child(key).remove(); this.getData()}}
-                ]);
+                    {text: 'OK', onPress: () => {this.itemRef.child(user).child(key).remove(); this.getData()}}
+                ], 
+                    {cancelable: false}
+                );
                 
             }
             
-        })
+
     }
 
     render() {
@@ -125,7 +127,7 @@ export default class Cart extends Component {
                     )}
                 />
                 <View style={styles.buttonFrame}>
-                    <Text style={styles.title}>{console.log(this.state.dataSource['productPrice'])}</Text>
+                    {/* <Text style={styles.title}>{console.log(this.state.dataSource['productPrice'])}</Text> */}
                     <Button title="thanh toán" color="#dc143c" />
                 </View>
             </View>

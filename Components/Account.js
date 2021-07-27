@@ -27,8 +27,10 @@ export default class Account extends Component {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
             Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
-                {text: 'OK', style: "default", onPress: () => this.props.navigation.navigate('Home')}
-            ])
+                {text: 'OK', style: "default", onPress: () => this.props.navigation.replace('Home')}
+            ], 
+                {cancelable: false}
+            )
         }).catch((error) => {
             // An error happened.
             console.log(error)
