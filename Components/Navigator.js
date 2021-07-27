@@ -13,6 +13,7 @@ import Header from './Header.js';
 import Cart from './Cart.js';
 import { fireBaseApp } from './FireBaseConfig.js';
 import Account from './Account.js';
+import UserOrder from './UserOrder.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -207,13 +208,13 @@ export default class Navigator extends Component {
                         headerTitle: 'Đăng ký thành viên',
                     }}
                 />
-                {/* <Stack.Screen 
-                    name="Profile" 
-                    component={Profile}
-                    options={{
-                        headerTitle: 'Tài khoản',
-                    }}
-                /> */}
+                <Stack.Screen 
+                    name="Order" 
+                    component={UserOrder}
+                    options={({ navigation, route }) => ({
+                        headerTitle: 'Thông tin đặt hàng',
+                    })}
+                />
                 
             </Stack.Navigator>
         )

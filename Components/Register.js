@@ -34,7 +34,7 @@ export default class Register extends Component {
             // console.log(userCredential)
             Alert.alert('Thông báo', this.state.email + ' Đã đăng ký thành công!', [
                 // {text: 'Cancel', onPress: () => console.log('Cancel Press'), style: 'cancel'},
-                {text: 'OK', onPress: () => this.props.navigation.navigate('Profile')}
+                {text: 'OK', onPress: () => this.props.navigation.replace('Home')}
             ], 
                 {cancelable: false}
             )
@@ -48,7 +48,7 @@ export default class Register extends Component {
         .catch((error) => {
             console.log(error);
             Alert.alert('Thông báo', 'Đăng ký thất bại!',[
-                {text: 'Cancel', onPress: () =>console.log('Cancel Press'), style: 'cancel'}
+                {text: 'Cancel', style: 'cancel'}
             ], 
                 {cancelable: false}
             )

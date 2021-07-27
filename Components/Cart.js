@@ -24,6 +24,7 @@ export default class Cart extends Component {
         this.state = {
             dataSource: [],
             qty: 1,
+            disabledTouch: true
         }
     }
 
@@ -41,7 +42,7 @@ export default class Cart extends Component {
                     });
                     this.setState({
                         dataSource: item
-                    })
+                    }, console.log(item))
                 });
                 this.itemRef.child(user.uid).on('child_removed', (dataSnapshot) =>{
                     item = item.filter((x) => x.key != dataSnapshot.key);
@@ -66,30 +67,50 @@ export default class Cart extends Component {
     }
 
     minus () {
-        this.setState({
-            qty: (this.state.qty - 1)
-        }, console.log(this.state.qty))
+        if (this.state.qty <= 1) {
+            this.setState({
+                disabledTouch: true
+            })
+        }   else {
+            this.setState({
+                qty: (this.state.qty - 1)
+            })
+        }
+        
     }
 
     plus () {
         this.setState({
-            qty: (this.state.qty + 1)
-        }, console.log(this.state.qty))
+            qty: (this.state.qty + 1),
+            disabledTouch: false
+        })
     }
 
     deleteItem (key) {
         var user = fireBaseApp.auth().currentUser.uid
-            if (user) {
-                Alert.alert('THÔNG BÁO', 'Bạn muốn xóa chứ?', [
-                    {text: 'Cancel', style: "cancel"},
-                    {text: 'OK', onPress: () => {this.itemRef.child(user).child(key).remove(); this.getData()}}
-                ], 
-                    {cancelable: false}
-                );
-                
-            }
+        if (user) {
+            Alert.alert('THÔNG BÁO', 'Bạn muốn xóa chứ?', [
+                {text: 'Cancel', style: "cancel"},
+                {text: 'OK', onPress: () => {this.itemRef.child(user).child(key).remove(); this.getData()}}
+            ], 
+                {cancelable: false}
+            );
             
+        }
+    }
 
+    getOrder () {
+        var arr = this.state.dataSource;
+        var object = arr.reduce(
+            (obj, item) => Object.assign(obj, {
+                ['key'] : item.key,
+                ['productName'] : item.productName,
+                ['productImage'] : item.productImage,
+                ['productPrice'] : item.productPrice,
+                ['productQty'] : this.state.qty
+            }), {}
+        );
+        console.log(object);
     }
 
     render() {
@@ -109,8 +130,8 @@ export default class Cart extends Component {
                                     <MaterialCommunityIcons name="delete-circle-outline" size={48} color="red" />
                                 </TouchableOpacity>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                    <TouchableOpacity onPress={() => this.minus()}>
-                                        <MaterialCommunityIcons name="minus-circle-outline" size={36} />
+                                    <TouchableOpacity onPress={() => this.minus()} disabled={this.state.disabledTouch}>
+                                        <MaterialCommunityIcons name="minus-circle-outline" size={36} color="blue" />
                                     </TouchableOpacity>
                                     <TextInput 
                                         style={styles.inputText} 
@@ -118,7 +139,7 @@ export default class Cart extends Component {
                                         onChangeText={(qty) => this.setState({qty: qty})}
                                     >{(this.state.qty)}</TextInput>
                                     <TouchableOpacity onPress={() => this.plus()}>
-                                        <MaterialCommunityIcons name="plus-circle-outline" size={36} />
+                                        <MaterialCommunityIcons name="plus-circle-outline" size={36} color="blue" />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -127,8 +148,8 @@ export default class Cart extends Component {
                     )}
                 />
                 <View style={styles.buttonFrame}>
-                    {/* <Text style={styles.title}>{console.log(this.state.dataSource['productPrice'])}</Text> */}
-                    <Button title="thanh toán" color="#dc143c" />
+                    {/* <Text style={styles.title}>{console.log(this.state.dataSource['productPrice'])}</Text> onPress={() => this.props.navigation.navigate('Order')} */}
+                    <Button title="đặt hàng ngay" color="#dc143c" onPress={() => this.getOrder()} />
                 </View>
             </View>
         )
