@@ -35,23 +35,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         height: height / 9,
-        width: width,
         backgroundColor: "#4d95c6",
         paddingTop: 25,
-        marginHorizontal: 8,
-        marginVertical: 5,
-    },
-    headerRow1: {
-        
-        // marginVertical: 5,
-        
-    },
-    textInput: {
-        marginHorizontal: 8,
-        height: height / 20,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        paddingLeft: 10,
+        paddingHorizontal: 10
+
     },
     title: {
         fontSize: 20,

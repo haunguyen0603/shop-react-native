@@ -12,6 +12,7 @@ import
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import DiscountProduct from './DiscountProduct.js';
+import Header from './Header.js';
 
 const { height } = Dimensions.get('window');
 
@@ -53,7 +54,7 @@ export default class Home extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                {/* <Header /> */}
+                <Header />
                 <ScrollView>
                     <Carousel
                     ref={(c) => { this._carousel = c; }}

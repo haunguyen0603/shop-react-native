@@ -14,6 +14,7 @@ import Cart from './Cart.js';
 import { fireBaseApp } from './FireBaseConfig.js';
 import Account from './Account.js';
 import UserOrder from './UserOrder.js';
+import { Avatar } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -129,23 +130,15 @@ export default class Navigator extends Component {
                                 },
                                 headerTintColor: '#fff',
                                 headerTitleAlign: 'center',
+                                headerShown: false
                             }}
                         >
-                            {/* <Stack.Screen 
-                                name="Profile" 
-                                component={Profile} 
-                                options={() => ({
-                                    headerTitle: "Thông tin cá nhân",
-                                    headerShown: false
-                                })}
-                            /> */}
                         {fireBaseApp.auth().currentUser === null ? (
                             <Stack.Screen 
                                 name="Profile" 
                                 component={Profile} 
                                 options={() => ({
                                     headerTitle: "Thông tin cá nhân",
-                                    headerShown: false
                                 })}
                             />
                         ) : (
@@ -154,7 +147,6 @@ export default class Navigator extends Component {
                                 component={Account} 
                                 options={({ navigation, route }) => ({
                                     headerTitle: "Welcome",
-                                    headerShown: false
                                 })}
                             />
                         )}     
@@ -174,17 +166,18 @@ export default class Navigator extends Component {
                     },
                     headerTintColor: '#fff',
                     headerTitleAlign: 'center',
+                    headerShown: false
                 }}
             >
                 <Stack.Screen 
                     name="Home"
                     component={this.HomeTab} 
                     options={{
-                        headerTitle: "Shop Thời Trang",
-                        headerLeft: () => (
-                            <Image style={{width:50, height:50, marginLeft:10}} source={require("../assets/logo.png")} />
-                        ),
-                        headerRight: () => (<Text style={{fontSize:15, fontStyle:'italic', color:'#fff', marginRight:10}}>FreeShip</Text>),
+                        // headerTitle: "Shop Thời Trang",
+                        // headerLeft: () => (
+                        //     <Image style={{width:50, height:50, marginLeft:10}} source={require("../assets/logo.png")} />
+                        // ),
+                        // headerRight: () => (<Text style={{fontSize:15, fontStyle:'italic', color:'#fff', marginRight:10}}>FreeShip</Text>),
                     }}
                 />
                 <Stack.Screen 
