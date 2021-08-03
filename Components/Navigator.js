@@ -14,7 +14,7 @@ import Cart from './Cart.js';
 import { fireBaseApp } from './FireBaseConfig.js';
 import Account from './Account.js';
 import UserOrder from './UserOrder.js';
-import { Avatar } from 'react-native-elements';
+import { Avatar, ListItem } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -130,7 +130,7 @@ export default class Navigator extends Component {
                                 },
                                 headerTintColor: '#fff',
                                 headerTitleAlign: 'center',
-                                headerShown: false
+                                // headerShown: false
                             }}
                         >
                         {fireBaseApp.auth().currentUser === null ? (
@@ -138,7 +138,7 @@ export default class Navigator extends Component {
                                 name="Profile" 
                                 component={Profile} 
                                 options={() => ({
-                                    headerTitle: "Thông tin cá nhân",
+                                    headerTitle: "Xin chào quý Khách",
                                 })}
                             />
                         ) : (
@@ -146,7 +146,21 @@ export default class Navigator extends Component {
                                 name="Privacy" 
                                 component={Account} 
                                 options={({ navigation, route }) => ({
-                                    headerTitle: "Welcome",
+                                    headerShown: false,
+                                    headerLeft: () => (
+                                        <ListItem>
+                                            <Avatar
+                                                size="small"
+                                                rounded
+                                                title="xin chao"
+                                                // source={{ uri: avatar_url }}
+                                            />
+                                            <ListItem.Content>
+                                                <ListItem.Title>123</ListItem.Title>
+                                                
+                                            </ListItem.Content>
+                                        </ListItem>
+                                    )
                                 })}
                             />
                         )}     
@@ -166,13 +180,13 @@ export default class Navigator extends Component {
                     },
                     headerTintColor: '#fff',
                     headerTitleAlign: 'center',
-                    headerShown: false
                 }}
             >
                 <Stack.Screen 
                     name="Home"
                     component={this.HomeTab} 
                     options={{
+                        headerShown: false
                         // headerTitle: "Shop Thời Trang",
                         // headerLeft: () => (
                         //     <Image style={{width:50, height:50, marginLeft:10}} source={require("../assets/logo.png")} />

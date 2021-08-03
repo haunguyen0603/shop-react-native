@@ -14,6 +14,7 @@ import
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { fireBaseApp } from './FireBaseConfig';
+import Header from "./Header";
 
 const { height } = Dimensions.get('window');
 
@@ -90,6 +91,11 @@ export default class ProductList extends Component {
     render(){
       return (
         <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <Image style={{ width: 50, height: 50 }} source={require('../assets/logo.png')} />
+            <Text style={styles.titleHeader}>Tất cả sản phẩm</Text>
+            <Text style={{ fontSize: 15, color: 'white', fontStyle: 'italic' }}>FreeShip</Text>
+          </View>
           <View style={{margin: 5, backgroundColor: '#fff'}}>
             <TextInput style={styles.searchBar} placeholder="Tìm kiếm" />
           </View>
@@ -156,4 +162,18 @@ const styles = StyleSheet.create({
       height: height / 20,
       paddingLeft: 10,
     },
+    header: {
+      flexDirection: "row",
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: height / 10,
+      backgroundColor: "#4d95c6",
+      paddingTop: 25,
+      paddingHorizontal: 10
+  },
+  titleHeader: {
+      fontSize: 20,
+      color: 'white',
+      fontWeight: 'bold'
+  },
 });

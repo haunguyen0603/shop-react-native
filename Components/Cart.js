@@ -117,6 +117,11 @@ export default class Cart extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <Image style={{ width: 50, height: 50 }} source={require('../assets/logo.png')} />
+                    <Text style={styles.titleHeader}>Giỏ hàng</Text>
+                    <Text style={{ fontSize: 15, color: 'white', fontStyle: 'italic' }}>FreeShip</Text>
+                </View>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem= {({item}) => (
@@ -161,6 +166,20 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+    },
+    header: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: height / 10,
+        backgroundColor: "#4d95c6",
+        paddingTop: 25,
+        paddingHorizontal: 10
+    },
+    titleHeader: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: 'bold'
     },
     frameItem: {
         backgroundColor: "#f8f8ff",
