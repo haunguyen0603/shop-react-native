@@ -41,10 +41,6 @@ export default class Account extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView >
-                    <View style={styles.avatar}>
-                        <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                        <Text style={styles.title}>Xin chào {this.auth !== null ? this.auth.email : "" }!</Text>
-                    </View>
                     <View style={styles.row}>
                         <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />
                         <TextInput placeholder="Họ và tên" style={styles.inputText} />

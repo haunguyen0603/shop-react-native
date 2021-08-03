@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ScrollView, Text, View, Image, StyleSheet } from 'react-native';
+import { Button, ScrollView, Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -9,7 +9,6 @@ import Profile from './Profile.js';
 import ContactUs from './ContactUs.js';
 import Login from './Login.js';
 import Register from './Register.js';
-import Header from './Header.js';
 import Cart from './Cart.js';
 import { fireBaseApp } from './FireBaseConfig.js';
 import Account from './Account.js';
@@ -18,6 +17,7 @@ import { Avatar, ListItem } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const { width } = Dimensions.get('window')
 
 currencyFormat = (num) => {
     return 'VND ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -129,8 +129,7 @@ export default class Navigator extends Component {
                                 backgroundColor: '#4d95c6',
                                 },
                                 headerTintColor: '#fff',
-                                headerTitleAlign: 'center',
-                                // headerShown: false
+                                
                             }}
                         >
                         {fireBaseApp.auth().currentUser === null ? (
@@ -139,6 +138,7 @@ export default class Navigator extends Component {
                                 component={Profile} 
                                 options={() => ({
                                     headerTitle: "Xin chào quý Khách",
+                                    headerTitleAlign: 'center',
                                 })}
                             />
                         ) : (
@@ -146,21 +146,23 @@ export default class Navigator extends Component {
                                 name="Privacy" 
                                 component={Account} 
                                 options={({ navigation, route }) => ({
-                                    headerShown: false,
+                                    headerTitle: "",
                                     headerLeft: () => (
-                                        <ListItem>
+                                        <ListItem containerStyle={{backgroundColor: '#4d95c6', width: width}}>
                                             <Avatar
-                                                size="small"
+                                                icon={{name: 'user', type: 'font-awesome'}}
+                                                source={{uri: "../assets/logo.png"}}
+                                                size="medium"
                                                 rounded
-                                                title="xin chao"
-                                                // source={{ uri: avatar_url }}
+                                                onPress={() => console.log("View Profile")}
                                             />
                                             <ListItem.Content>
-                                                <ListItem.Title>123</ListItem.Title>
-                                                
+                                                <ListItem.Title>{fireBaseApp.auth().currentUser.email}</ListItem.Title>
+                                                <ListItem.Content>{<Text>Welcome Back</Text>}</ListItem.Content>
                                             </ListItem.Content>
                                         </ListItem>
-                                    )
+                                    ),
+                                    
                                 })}
                             />
                         )}     

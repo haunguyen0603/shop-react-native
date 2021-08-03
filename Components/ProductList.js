@@ -14,7 +14,6 @@ import
 } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { fireBaseApp } from './FireBaseConfig';
-import Header from "./Header";
 
 const { height } = Dimensions.get('window');
 
