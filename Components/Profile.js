@@ -13,31 +13,67 @@ import
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { fireBaseApp } from './FireBaseConfig';
+import { Avatar } from 'react-native-elements';
 
 const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window')
 
 export default class Profile extends Component {
+    constructor (props) {
+        super(props);
+        
+    }
+    
+    logOut () {
+        fireBaseApp.auth().signOut().then(() => {
+            // Sign-out successful.
+            Alert.alert('THÔNG BÁO', 'Đăng xuất thành công!', [
+                {text: 'OK', style: "default", onPress: () => this.props.navigation.replace('Home')}
+            ], 
+                {cancelable: false}
+            )
+        }).catch((error) => {
+            // An error happened.
+            console.log(error)
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                {/* <Text>{console.log(fireBaseApp.auth().currentUser)}</Text> */}
                 <ScrollView >
-                    <View style={styles.avatar}>
-                        <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                        <Text style={styles.title}>Xin chào Khách!</Text>
-                        <Text style={styles.title}>Hãy đăng nhập để thấy những thông tin</Text>
+                    <View style={{justifyContent:'center', alignItems:'center', paddingVertical: 15}}>
+                        <Avatar
+                            size="xlarge"
+                            icon={{name: 'user', color: 'orange', type: 'font-awesome'}}
+                            overlayContainerStyle={{backgroundColor: 'gray'}}
+                            onPress={() => console.log("Works!")}
+                            activeOpacity={0.7}
+                            // containerStyle={{flex: 4, marginTop: 20}}
+                            rounded
+                        />
                     </View>
-                    <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 15}}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                            <Text style={styles.content}>Đăng nhập</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}>
-                            <Text style={styles.content}>Đăng ký</Text>
-                        </TouchableOpacity>
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />
+                        <TextInput placeholder="Họ và tên" style={styles.inputText} />
                     </View>
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons name="card-account-details-outline" size={36} color='#b0e0e6' />
+                        <TextInput placeholder="Địa chỉ" style={styles.inputText} />
+                    </View>
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons name="cellphone-iphone" size={36} color='#b0e0e6' />
+                        <TextInput placeholder="Số điện thoại" style={styles.inputText} keyboardType="phone-pad" />
+                    </View>
+                    {/* <View style={styles.row}>
+                        <MaterialCommunityIcons name="history" size={36} color='#90ee90' />
+                        <TouchableOpacity>
+                            <Text style={styles.buttonLine}>Lịch sử đặt hàng</Text>
+                        </TouchableOpacity>
+                    </View> */}
                     
                 </ScrollView>
+                <Button title="Đăng xuất" color="#dc143c" onPress={() => this.logOut()} />
             </View>
         )
     }
@@ -46,7 +82,8 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        justifyContent: 'center'
     },
     avatar: {
         height: height * 0.3,
@@ -60,9 +97,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        alignItems: 'center',
-        fontStyle: 'italic',
-        color: "#90ee90"
+        alignItems: 'center'
     },
     row: {
         flexDirection: 'row',

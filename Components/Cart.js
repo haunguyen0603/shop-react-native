@@ -127,7 +127,7 @@ export default class Cart extends Component {
                     renderItem= {({item}) => (
                         <View style={styles.frameItem}>
                             <View style={{alignItems: "center"}}>
-                                <Image source={{uri: "http://192.168.1.7/shop/public/source/image/product/" + item.productImage}} style={styles.imageStyle} />
+                                <Image source={{uri: "http://192.168.1.10/shop/public/source/image/product/" + item.productImage}} style={styles.imageStyle} />
                                 <Text style={styles.title}>{item.productName}</Text>
                             </View>
                             <Text style={styles.price}>{this.currencyFormat(item.productPrice)}</Text>

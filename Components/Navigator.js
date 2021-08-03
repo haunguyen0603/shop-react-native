@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ScrollView, Text, View, Image, StyleSheet, Dimensions } from 'react-native';
+import { Button, ScrollView, Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -28,7 +28,7 @@ currencyFormat = (num) => {
     return (
         <View style={styles.container}>
             <ScrollView>
-            <Image source={{uri: 'http://192.168.1.7/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
+            <Image source={{uri: 'http://192.168.1.10/shop/public/source/image/product/' + route.params.image}} style={{height: 400, width: 400, paddingTop: 20}} />
             <Text style={styles.title}>Tên sản phẩm: {route.params.name}</Text>
             <Text style={styles.title}>Giá: {currencyFormat(route.params.unit_price)}</Text>
             <Text style={styles.promotion}>Giá khuyến mãi: {currencyFormat(route.params.promotion_price)}</Text>
@@ -135,10 +135,26 @@ export default class Navigator extends Component {
                         {fireBaseApp.auth().currentUser === null ? (
                             <Stack.Screen 
                                 name="Profile" 
-                                component={Profile} 
-                                options={() => ({
-                                    headerTitle: "Xin chào quý Khách",
-                                    headerTitleAlign: 'center',
+                                component={Account} 
+                                options={({ navigation, route }) => ({
+                                    headerTitle: "",
+                                    headerLeft: () => (
+                                        <ListItem containerStyle={{backgroundColor: '#4d95c6', width: width}}>
+                                            <Avatar
+                                                icon={{name: 'user', type: 'font-awesome'}}
+                                                source={{uri: "../assets/logo.png"}}
+                                                size="medium"
+                                                rounded
+                                                onPress={() => navigation.navigate('Login')}
+                                            />
+                                            <ListItem.Content>
+                                                <ListItem.Title>{<Text style={{color: '#fff', fontWeight:'bold'}} onPress={() => navigation.navigate('Login')}>Xin chào quý Khách</Text>}</ListItem.Title>
+                                                <ListItem containerStyle={{backgroundColor: '#4d95c6', padding:0, margin:0}}>
+                                                    <ListItem.Title>{<Text style={{color: '#fff'}} onPress={() => navigation.navigate('Login')}>Đăng nhập</Text>}</ListItem.Title>
+                                                </ListItem>
+                                            </ListItem.Content>
+                                        </ListItem>
+                                    ),
                                 })}
                             />
                         ) : (
@@ -154,7 +170,7 @@ export default class Navigator extends Component {
                                                 source={{uri: "../assets/logo.png"}}
                                                 size="medium"
                                                 rounded
-                                                onPress={() => console.log("View Profile")}
+                                                onPress={() => navigation.navigate('Profile')}
                                             />
                                             <ListItem.Content>
                                                 <ListItem.Title>{fireBaseApp.auth().currentUser.email}</ListItem.Title>
@@ -189,11 +205,6 @@ export default class Navigator extends Component {
                     component={this.HomeTab} 
                     options={{
                         headerShown: false
-                        // headerTitle: "Shop Thời Trang",
-                        // headerLeft: () => (
-                        //     <Image style={{width:50, height:50, marginLeft:10}} source={require("../assets/logo.png")} />
-                        // ),
-                        // headerRight: () => (<Text style={{fontSize:15, fontStyle:'italic', color:'#fff', marginRight:10}}>FreeShip</Text>),
                     }}
                 />
                 <Stack.Screen 
@@ -215,6 +226,18 @@ export default class Navigator extends Component {
                     component={Register}
                     options={{
                         headerTitle: 'Đăng ký thành viên',
+                    }}
+                />
+                <Stack.Screen 
+                    name="Profile" 
+                    component={Profile}
+                    options={{
+                        headerTitle: 'Thông tin cá nhân',
+                        headerRight: () => (
+                            <TouchableOpacity style={{marginRight:10}} onPress={() => console.log("Submit")}>
+                                <MaterialCommunityIcons name="account-check-outline" size={36} color="#fff" />
+                            </TouchableOpacity>
+                        )
                     }}
                 />
                 <Stack.Screen 

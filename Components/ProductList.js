@@ -33,7 +33,7 @@ export default class ProductList extends Component {
     };
 
     getData = async () => {
-      fetch('http://192.168.1.7/shop/public/show-product-api?page=' + this.state.page)
+      fetch('http://192.168.1.10/shop/public/show-product-api?page=' + this.state.page)
       .then((response) => response.json())
       .then((json) => 
       {
@@ -104,7 +104,7 @@ export default class ProductList extends Component {
               renderItem={({ item })=>(
               <View style={styles.item}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('ProductDetail', item)}>
-                  <Image source={{uri:'http://192.168.1.7/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
+                  <Image source={{uri:'http://192.168.1.10/shop/public/source/image/product/' + item.image}} style={styles.images}></Image>
                 </TouchableOpacity> 
                 <Text style={styles.title}>{item.name}</Text>
                 <TouchableOpacity onPress={() => this.addCart(item)}>
