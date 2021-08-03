@@ -42,7 +42,7 @@ export default class Cart extends Component {
                     });
                     this.setState({
                         dataSource: item
-                    }, console.log(item))
+                    })
                 });
                 this.itemRef.child(user.uid).on('child_removed', (dataSnapshot) =>{
                     item = item.filter((x) => x.key != dataSnapshot.key);
@@ -110,7 +110,7 @@ export default class Cart extends Component {
                 ['productQty'] : this.state.qty
             }), {}
         );
-        console.log(object);
+        // console.log(object);
         // this.props.navigation.navigate('Order', object);
     }
 

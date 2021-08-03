@@ -21,9 +21,38 @@ const { width } = Dimensions.get('window')
 export default class Profile extends Component {
     constructor (props) {
         super(props);
-        
+        this.user = fireBaseApp.auth().currentUser;
+        this.state = {
+            fullname: '',
+            address: '',
+            phone: '',
+        }
+
+        this.props.navigation.setOptions({ 
+            headerRight: () => (
+                <TouchableOpacity style={{marginRight:10}} onPress={() => this.submitProfile()}>
+                    <MaterialCommunityIcons name="account-check-outline" size={36} color="#fff" />
+                </TouchableOpacity>
+            )
+        });
     }
-    
+
+    submitProfile() {
+        user.updateProfile({
+            displayName: this.state.fullname,
+            phoneNumber: this.state.phone,
+            photoURL: null
+        }).then(() => {
+            Alert.alert('THÔNG BÁO', 'Cập nhật thành công!', [
+                {text: "OK", onPress: () => this.props.navigation.navigate('Privacy')}
+            ]);
+            console.log(user)
+
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
     logOut () {
         fireBaseApp.auth().signOut().then(() => {
             // Sign-out successful.
@@ -54,16 +83,40 @@ export default class Profile extends Component {
                         />
                     </View>
                     <View style={styles.row}>
+                        <MaterialCommunityIcons name="email-check-outline" size={36} color='#b0e0e6' />
+                        <TextInput 
+                            placeholder="Email"
+                            style={styles.inputText} 
+                            defaultValue={this.user.email}
+                            editable={false}
+                        />
+                    </View>
+                    <View style={styles.row}>
                         <MaterialCommunityIcons name="account-box-outline" size={36} color='#b0e0e6' />
-                        <TextInput placeholder="Họ và tên" style={styles.inputText} />
+                        <TextInput 
+                            placeholder="Họ và tên" 
+                            style={styles.inputText} 
+                            onChangeText={( fullname ) => this.setState({fullname: fullname})}
+                        >{this.user.displayName}</TextInput>
                     </View>
                     <View style={styles.row}>
                         <MaterialCommunityIcons name="card-account-details-outline" size={36} color='#b0e0e6' />
-                        <TextInput placeholder="Địa chỉ" style={styles.inputText} />
+                        <TextInput 
+                            placeholder="Địa chỉ" 
+                            style={styles.inputText} 
+                            onChangeText={( address ) => this.setState({address: address})}
+                            value={this.state.address}
+                            />
                     </View>
                     <View style={styles.row}>
                         <MaterialCommunityIcons name="cellphone-iphone" size={36} color='#b0e0e6' />
-                        <TextInput placeholder="Số điện thoại" style={styles.inputText} keyboardType="phone-pad" />
+                        <TextInput 
+                            placeholder="Số điện thoại" 
+                            style={styles.inputText} 
+                            defaultValue={this.user.phoneNumber}
+                            keyboardType="phone-pad" 
+                            onChangeText={( phone ) => this.setState({phone: phone})}
+                        >{this.user.phoneNumber}</TextInput>
                     </View>
                     {/* <View style={styles.row}>
                         <MaterialCommunityIcons name="history" size={36} color='#90ee90' />

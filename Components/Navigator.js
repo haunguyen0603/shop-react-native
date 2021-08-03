@@ -173,7 +173,7 @@ export default class Navigator extends Component {
                                                 onPress={() => navigation.navigate('Profile')}
                                             />
                                             <ListItem.Content>
-                                                <ListItem.Title>{fireBaseApp.auth().currentUser.email}</ListItem.Title>
+                                                <ListItem.Title>{fireBaseApp.auth().currentUser.displayName}</ListItem.Title>
                                                 <ListItem.Content>{<Text>Welcome Back</Text>}</ListItem.Content>
                                             </ListItem.Content>
                                         </ListItem>
@@ -231,14 +231,14 @@ export default class Navigator extends Component {
                 <Stack.Screen 
                     name="Profile" 
                     component={Profile}
-                    options={{
+                    options={({ navigation }) => ({
                         headerTitle: 'Thông tin cá nhân',
-                        headerRight: () => (
-                            <TouchableOpacity style={{marginRight:10}} onPress={() => console.log("Submit")}>
-                                <MaterialCommunityIcons name="account-check-outline" size={36} color="#fff" />
-                            </TouchableOpacity>
-                        )
-                    }}
+                        // headerRight: () => (
+                        //     <TouchableOpacity style={{marginRight:10}} onPress={() => console.log(this.props)}>
+                        //         <MaterialCommunityIcons name="account-check-outline" size={36} color="#fff" />
+                        //     </TouchableOpacity>
+                        // )
+                    })}
                 />
                 <Stack.Screen 
                     name="Order" 

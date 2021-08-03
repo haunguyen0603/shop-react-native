@@ -20,14 +20,14 @@ const { width } = Dimensions.get('window')
 export default class Account extends Component {
     constructor(props){
         super(props);
-        this.auth = fireBaseApp.auth().currentUser;
+        user = fireBaseApp.auth().currentUser;
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <ScrollView >
-                    
+                    <Text>{console.log(user)}</Text>
                 </ScrollView>
             </View>
         )
