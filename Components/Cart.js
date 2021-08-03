@@ -111,6 +111,7 @@ export default class Cart extends Component {
             }), {}
         );
         console.log(object);
+        // this.props.navigation.navigate('Order', object);
     }
 
     render() {

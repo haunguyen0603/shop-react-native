@@ -43,7 +43,6 @@ export default class Account extends Component {
                 <ScrollView >
                     <View style={styles.avatar}>
                         <MaterialCommunityIcons name="account-circle-outline" size={144} color="#a9a9a9" />
-                        {/* <Text style={styles.title}>Xin chào {this.props.route.params.displayName === null ? this.props.route.params.email : this.props.route.params.displayName}</Text> */}
                         <Text style={styles.title}>Xin chào {this.auth !== null ? this.auth.email : "" }!</Text>
                     </View>
                     <View style={styles.row}>
