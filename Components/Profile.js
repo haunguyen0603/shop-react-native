@@ -23,9 +23,9 @@ export default class Profile extends Component {
         super(props);
         this.user = fireBaseApp.auth().currentUser;
         this.state = {
-            fullname: '',
+            fullname: this.user.displayName,
             address: '',
-            phone: '',
+            phone: this.user.phoneNumber,
         }
 
         this.props.navigation.setOptions({ 
@@ -38,7 +38,7 @@ export default class Profile extends Component {
     }
 
     submitProfile() {
-        user.updateProfile({
+        this.user.updateProfile({
             displayName: this.state.fullname,
             phoneNumber: this.state.phone,
             photoURL: null
@@ -46,7 +46,7 @@ export default class Profile extends Component {
             Alert.alert('THÔNG BÁO', 'Cập nhật thành công!', [
                 {text: "OK", onPress: () => this.props.navigation.navigate('Privacy')}
             ]);
-            console.log(user)
+            // console.log(user)
 
         }).catch((error) => {
             console.log(error)
@@ -96,8 +96,9 @@ export default class Profile extends Component {
                         <TextInput 
                             placeholder="Họ và tên" 
                             style={styles.inputText} 
+                            defaultValue={this.user.displayName}
                             onChangeText={( fullname ) => this.setState({fullname: fullname})}
-                        >{this.user.displayName}</TextInput>
+                        />
                     </View>
                     <View style={styles.row}>
                         <MaterialCommunityIcons name="card-account-details-outline" size={36} color='#b0e0e6' />

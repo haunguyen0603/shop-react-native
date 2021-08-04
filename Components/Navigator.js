@@ -14,6 +14,8 @@ import { fireBaseApp } from './FireBaseConfig.js';
 import Account from './Account.js';
 import UserOrder from './UserOrder.js';
 import { Avatar, ListItem } from 'react-native-elements';
+import OrderHistory from './OrderHistory.js';
+import ChangePassword from './ChangePassword.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -245,6 +247,20 @@ export default class Navigator extends Component {
                     component={UserOrder}
                     options={({ navigation, route }) => ({
                         headerTitle: 'Thông tin đặt hàng',
+                    })}
+                />
+                <Stack.Screen 
+                    name="OrderHistory" 
+                    component={OrderHistory}
+                    options={({ navigation, route }) => ({
+                        headerTitle: 'Lịch sử đặt hàng',
+                    })}
+                />
+                <Stack.Screen 
+                    name="ChangePassword" 
+                    component={ChangePassword}
+                    options={({ navigation, route }) => ({
+                        headerTitle: 'Đổi mật khẩu',
                     })}
                 />
                 
