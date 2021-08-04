@@ -175,8 +175,8 @@ export default class Navigator extends Component {
                                                 onPress={() => navigation.navigate('Profile')}
                                             />
                                             <ListItem.Content>
-                                                <ListItem.Title>{fireBaseApp.auth().currentUser.displayName}</ListItem.Title>
-                                                <ListItem.Content>{<Text>Welcome Back</Text>}</ListItem.Content>
+                                                <ListItem.Title style={{fontWeight:'bold', color:"#fff"}}>{fireBaseApp.auth().currentUser.displayName}</ListItem.Title>
+                                                <ListItem.Content>{<Text style={{color:"#fff"}}>Welcome Back</Text>}</ListItem.Content>
                                             </ListItem.Content>
                                         </ListItem>
                                     ),

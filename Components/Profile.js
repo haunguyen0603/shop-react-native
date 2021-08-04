@@ -46,7 +46,7 @@ export default class Profile extends Component {
             Alert.alert('THÔNG BÁO', 'Cập nhật thành công!', [
                 {text: "OK", onPress: () => this.props.navigation.navigate('Privacy')}
             ]);
-            // console.log(user)
+            console.log(this.user)
 
         }).catch((error) => {
             console.log(error)
